@@ -9,10 +9,11 @@ def home(request):
     L= []
     for blog in blogs.all():
         body = blog.body
-        L.append(str(body))
-    L.split()
+        L.append(body)
+
     random_result = random.choice(L)
     return render(request, 'blog/home.html', {'L': L, 'random_result': random_result})
+
 
 
 def detail(request, blog_id):
@@ -24,7 +25,6 @@ def new(request):
 
 def create(request):
     blog = Blog()
-    # blog.title = request.GET['title']
     blog.body = request.GET['body']
     blog.pub_date = timezone.datetime.now()
     blog.save()
