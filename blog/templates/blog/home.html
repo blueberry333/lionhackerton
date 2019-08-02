@@ -2,9 +2,13 @@
 
 {% block content %}
     <br>
-
+        {% if image %}
+        <image src="http://www.urbanbrush.net/web/wp-content/uploads/edd/2018/03/web-20180325082757364846.png"></image>
+        {% endif %}
+        <br>
+        <br>
         랜덤: {{ random_result }}
-
+    <br>
     <br>
 
     <div class="container">
@@ -23,9 +27,15 @@
         <div class="container">
             <div class="card">
                 <div class="card-body">
+
                     <div class="delete">
-                            <p><a href="{% url 'delete' blog.id %}">삭제</a></p>
-                        </div>
+                        <p><a href="{% url 'delete' blog.id %}">삭제</a></p>
+                    </div>
+
+                    <div class="edit">
+                        <p><a href="{% url 'edit' blog.id %}">수정</a></p>
+                    </div>
+
                     <p class="card-text">{{ blog.body }}</p>
                 </div>
             </div>

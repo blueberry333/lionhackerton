@@ -24,8 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blog.views.show_blogs, name='home'),
     path('<int:blog_id>/delete', blog.views.delete, name='delete'),
+    path('<int:blog_id>/edit', blog.views.edit, name='edit'),
 
     path('blog/', include('blog.urls')),
     path('portfolio/', include('portfolio.urls')),
-    path('accounts/', include('accounts.urls'))
+    path('accounts/', include('accounts.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
