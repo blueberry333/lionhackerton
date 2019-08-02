@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blog.views.show_blogs, name='home'),
-    path('', blog.views.get_list, name = 'get_list'),
+    path('<int:blog_id>/delete', blog.views.delete, name='delete'),
 
     path('blog/', include('blog.urls')),
     path('portfolio/', include('portfolio.urls')),

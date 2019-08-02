@@ -1,20 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- {% for blog in blogs.all %} -->
-        <!-- <div class="container"> -->
-            <!-- <br> -->
-            <!-- <div class="card"> -->
-                <!-- <div class="card-body">
-                    <h5 class="card-title">{{ blog.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ blog.pub_date | date:"Y.m. d"}}</h6>
-                    <p class="card-text">{{ blog.body }}</p>
-                </div>
-            </div>
-            <br>
-        </div>
-    {% endfor %} -->
     <br>
+
+        랜덤: {{ random_result }}
+
+    <br>
+
     <div class="container">
         <form action="{% url 'create' %}">
             <textarea cols= 120 rows= 5 name="body"></textarea>
@@ -29,9 +21,11 @@
     <div>
     {% for blog in blogs.all %}
         <div class="container">
-            <br>
             <div class="card">
                 <div class="card-body">
+                    <div class="delete">
+                            <p><a href="{% url 'delete' blog.id %}">삭제</a></p>
+                        </div>
                     <p class="card-text">{{ blog.body }}</p>
                 </div>
             </div>
@@ -40,14 +34,6 @@
     {% endfor %}
     </div>
 
-    <!-- <div>
-    {% for item in L %}
-        {{ item }} <br>
-    {% endfor %}
-    </div> -->
-
     <br>
-    <div>
-    {{ random_result }}
-    </div>
+    <br>
 {% endblock %}

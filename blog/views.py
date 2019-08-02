@@ -18,27 +18,14 @@ def make_blogs():
 
 def show_blogs(request):
     blogs = make_blogs()
-    return render(request, 'blog/home.html', {'blogs': blogs})
-
-def home():
-    blogs = make_blogs()
     L= []
     for blog in blogs.all():
         body = blog.body
         L.append(body)
-    return L
-
-
-def get_list(request):
-    L = home()
     random_result = random.choice(L)
-    return render(request, 'blog/home.html', {'L': L, 'random_result': random_result})
+    return render(request, 'blog/home.html', {'random_result': random_result, 'blogs': blogs})
 
-
-
-def detail(request, blog_id):
-    blog_detail = get_object_or_404(Blog, pk=blog_id)
-    return render(request, 'blog/detail.html', {'blog': blog_detail})
-
-def new(request):
-    return render(request, 'blog/new.html')
+def delete(request, blog_id):
+    blog = Blog.objects.get(id=blog_id)
+    blog.delete()
+    return redirect('/')
