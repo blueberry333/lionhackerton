@@ -20,20 +20,36 @@ def make_blogs():
 def show_blogs(request):
     blogs = make_blogs()
     L= []
-    image =''
+    imageminus=''
+    image0 =''
+    image1 =''
+    image2 =''
+    image3 =''
+    image4 =''
     for blog in blogs.all():
         body = blog.body
         L.append(body)
+
+    if L == []:
+        L = ['empty']
+
     random_result = random.choice(L)
 
-    if len(L) == 20 :
-        image = 'image0'
-    elif len(L) == 10:
-        image = 'image1'
-    elif len(L) == 0:
-        image = 'image2' #빵터지는 사진
 
-    return render(request, 'blog/home.html', {'random_result': random_result, 'blogs': blogs, 'image':image})
+    if len(L) >= 25 :
+        imageminus = 'imageminus'
+    elif len(L) >= 20 :
+        image0 = 'image0'
+    elif len(L) >= 10:
+        image1 = 'image1'
+    elif len(L) >= 5:
+        image2 = 'image2'
+    elif len(L) > 0 and L != ['empty']:
+        image3 = 'image3'
+    elif L == ['empty']:
+        image4 = 'image4'
+
+    return render(request, 'blog/home.html', {'random_result': random_result, 'blogs': blogs, 'imageminus':imageminus, 'image0':image0, 'image1':image1, 'image2':image2, 'image3':image3, 'image4':image4})
 
 
 def delete(request, blog_id):
