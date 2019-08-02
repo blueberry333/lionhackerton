@@ -14,12 +14,26 @@
             <br>
         </div>
     {% endfor %} -->
+    <br>
+    <div class="container">
+        <form action="{% url 'create' %}">
+            <textarea cols= 120 rows= 5 name="body"></textarea>
+            <br>
+            <br>
+            <input class="btn btn-dark" type="submit" value="리스트 추가하기">
+        </form>
+    </div>
+
+    <br>
+
     <div>
     {% for item in L %}
         {{ item }} <br>
     {% endfor %}
-
     </div>
+
     <br>
+    <div>
     {{ random_result }}
+    </div>
 {% endblock %}
