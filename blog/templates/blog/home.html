@@ -27,10 +27,24 @@
     <br>
 
     <div>
+    {% for blog in blogs.all %}
+        <div class="container">
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">{{ blog.body }}</p>
+                </div>
+            </div>
+            <br>
+        </div>
+    {% endfor %}
+    </div>
+
+    <!-- <div>
     {% for item in L %}
         {{ item }} <br>
     {% endfor %}
-    </div>
+    </div> -->
 
     <br>
     <div>

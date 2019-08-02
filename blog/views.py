@@ -4,13 +4,33 @@ import random
 from .models import Blog
 
 # Create your views here.
-def home(request):
+
+def create(request):
+    blog = Blog()
+    blog.body = request.GET['body']
+    blog.pub_date = timezone.datetime.now()
+    blog.save()
+    return redirect('/')
+
+def make_blogs():
     blogs = Blog.objects
+    return blogs
+
+def show_blogs(request):
+    blogs = make_blogs()
+    return render(request, 'blog/home.html', {'blogs': blogs})
+
+def home():
+    blogs = make_blogs()
     L= []
     for blog in blogs.all():
         body = blog.body
         L.append(body)
+    return L
 
+
+def get_list(request):
+    L = home()
     random_result = random.choice(L)
     return render(request, 'blog/home.html', {'L': L, 'random_result': random_result})
 
@@ -22,10 +42,3 @@ def detail(request, blog_id):
 
 def new(request):
     return render(request, 'blog/new.html')
-
-def create(request):
-    blog = Blog()
-    blog.body = request.GET['body']
-    blog.pub_date = timezone.datetime.now()
-    blog.save()
-    return redirect('/')
