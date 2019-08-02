@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <image src="media/images/full.png"></image>
     <br>
         {% if imageminus %}
         <image src="media/images/none.jpeg"></image>
@@ -22,7 +23,9 @@
         {% endif %}
         <br>
         <br>
-        랜덤: {{ random_result }} / 실천하고 삭제하기 버튼: <button onclick="beerequipment()">BEER</button>
+
+        <p>랜덤 결과: {{ random_result }} </p>
+        실천하고 삭제하기 버튼: <button onclick="beerequipment()">Button</button>
     <br>
     <br>
 
@@ -41,24 +44,20 @@
     {% for blog in blogs.all %}
         <div class="container">
             <div class="card">
-                <div class="card-body" id="">
-
+                <div class="card-body">
+                    <p class="card-text">{{ blog.body }}</p>
                     <div class="delete">
                         <p><a href="{% url 'delete' blog.id %}">삭제</a></p>
                     </div>
-
                     <div class="edit">
                         <p><a href="{% url 'edit' blog.id %}">수정</a></p>
                     </div>
-
-                    <p class="card-text">{{ blog.body }}</p>
                 </div>
             </div>
             <br>
         </div>
     {% endfor %}
     </div>
-
     <br>
     <br>
 
