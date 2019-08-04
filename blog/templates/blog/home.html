@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load staticfiles %}
     <image src="media/images/full.png"></image>
     <br>
         {% if imageminus %}
@@ -21,11 +22,6 @@
         {% if image4 %}
         <image src="media/images/4.jpeg"></image>
         {% endif %}
-        <br>
-        <br>
-
-        <p>랜덤 결과: {{ random_result }} </p>
-        실천하고 삭제하기 버튼: <button onclick="beerequipment()">Button</button>
     <br>
     <br>
 
@@ -40,11 +36,19 @@
 
     <br>
 
+
     <div>
+    랜덤 결과: {{ random_result }}
+
+
     {% for blog in blogs.all %}
+        {% if blog.author == request.user %}
         <div class="container">
             <div class="card">
+                <p class="card-text">{{ blog.pub_date }}</p>
                 <div class="card-body">
+                    <!-- 타이틀: {{ blog.title }} -->
+                    <!-- <p class="card-text">{{ blog.author }}</p> -->
                     <p class="card-text">{{ blog.body }}</p>
                     <div class="delete">
                         <p><a href="{% url 'delete' blog.id %}">삭제</a></p>
@@ -54,20 +58,18 @@
                     </div>
                 </div>
             </div>
-            <br>
         </div>
+        {% endif %}
     {% endfor %}
     </div>
+
     <br>
     <br>
 
-    <scrit>
-        <a href="javascript:void(0)" onclick="beerequipment()">BEER</a>
 
-        <script>
-            function beerequipment() {
-                $(window).scrollTop($("*:contains('BEER EQUIPMENT'):last").offset().top);
-            }
-        </script>
-    </scrit>
+    <script>
+        function beerequipment() {
+            $(window).scrollTop($("*:contains('BEER EQUIPMENT'):last").offset().top);
+        }
+    </script>
 {% endblock %}
